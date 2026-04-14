@@ -53,6 +53,22 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: "power3.out"
     });
 
+    // Experience Timeline Animation
+    gsap.utils.toArray('.timeline-group').forEach((group) => {
+        const header = group.querySelector('.company-header');
+        const items = group.querySelectorAll('.timeline-item');
+        
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: group,
+                start: "top 80%",
+            }
+        });
+
+        tl.from(header, { x: -30, opacity: 0, duration: 0.6, ease: "power3.out" })
+          .from(items, { x: -20, opacity: 0, duration: 0.6, stagger: 0.2, ease: "power3.out" }, "-=0.3");
+    });
+
     // Projects Grid Animation
     gsap.utils.toArray('.project-card').forEach((card, i) => {
         gsap.from(card, {

@@ -23,12 +23,31 @@ document.addEventListener('DOMContentLoaded', () => {
           .from(".summary", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
           .from(".cta-group", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=0.4");
 
-    // Carousel Auto-rotation Logic
+    // Carousel Auto-rotation Logic (desktop only)
     const carouselCards = document.querySelectorAll('.carousel-card');
     let currentIndex = 0;
+    const isMobile = () => window.innerWidth <= 600;
+
+    // On mobile, strip positional classes so CSS slider takes over
+    function initMobileSlider() {
+        if (isMobile()) {
+            carouselCards.forEach(card => card.classList.remove('active', 'next', 'prev'));
+        } else {
+            // Re-apply desktop classes if resized back to desktop
+            carouselCards.forEach(card => card.classList.remove('active', 'next', 'prev'));
+            if (carouselCards.length > 0) {
+                carouselCards[currentIndex].classList.add('active');
+                carouselCards[(currentIndex + 1) % carouselCards.length].classList.add('next');
+                carouselCards[(currentIndex + 2) % carouselCards.length].classList.add('prev');
+            }
+        }
+    }
+
+    initMobileSlider();
+    window.addEventListener('resize', initMobileSlider);
 
     setInterval(() => {
-        if(carouselCards.length === 0) return;
+        if (carouselCards.length === 0 || isMobile()) return;
         carouselCards.forEach(card => card.classList.remove('active', 'next', 'prev'));
         
         currentIndex = (currentIndex + 1) % carouselCards.length;

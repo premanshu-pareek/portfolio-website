@@ -600,12 +600,66 @@ footer {
 }
 
 @media (max-width: 600px) {
+    /* --- Navigation: Center the logo --- */
+    .nav-content {
+        justify-content: center;
+    }
+
     .nav-links {
         display: none; /* simple mobile fallback, ideally add a burger menu */
     }
+
+    /* --- Hero: Full-width CTA buttons --- */
     .hero-text .name {
         font-size: 3rem;
     }
+
+    .cta-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cta-group .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* --- Hero Visual: Horizontal swipe slider --- */
+    .hero-visual {
+        height: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        display: flex;
+        gap: 1rem;
+        padding: 1rem 0;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .hero-visual::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+    }
+
+    .carousel-card {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none !important;
+        opacity: 1 !important;
+        z-index: 1 !important;
+        flex: 0 0 85%;
+        min-width: 0;
+        scroll-snap-align: center;
+    }
+
+    .carousel-card .card-desc {
+        max-height: 120px;
+        opacity: 1;
+        margin-top: 1rem;
+    }
+
+    /* --- Projects grid --- */
     .projects-grid {
         grid-template-columns: 1fr;
     }

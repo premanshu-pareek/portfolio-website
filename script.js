@@ -21,10 +21,22 @@ document.addEventListener('DOMContentLoaded', () => {
           .from(".name", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
           .from(".role", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
           .from(".summary", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
-          .from(".cta-group", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
-          .from(".main-card", { x: 50, opacity: 0, duration: 0.8, ease: "back.out(1.7)" }, "-=0.4")
-          .from(".small-card-1", { x: -30, opacity: 0, duration: 0.8, ease: "back.out(1.7)" }, "-=0.6")
-          .from(".small-card-2", { y: 30, opacity: 0, duration: 0.8, ease: "back.out(1.7)" }, "-=0.6");
+          .from(".cta-group", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=0.4");
+
+    // Carousel Auto-rotation Logic
+    const carouselCards = document.querySelectorAll('.carousel-card');
+    let currentIndex = 0;
+
+    setInterval(() => {
+        if(carouselCards.length === 0) return;
+        carouselCards.forEach(card => card.classList.remove('active', 'next', 'prev'));
+        
+        currentIndex = (currentIndex + 1) % carouselCards.length;
+        
+        carouselCards[currentIndex].classList.add('active');
+        carouselCards[(currentIndex + 1) % carouselCards.length].classList.add('next');
+        carouselCards[(currentIndex + 2) % carouselCards.length].classList.add('prev');
+    }, 4000);
 
     // Section Headers Animation
     gsap.utils.toArray('.section-header').forEach(header => {
